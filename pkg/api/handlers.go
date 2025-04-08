@@ -32,7 +32,7 @@ func NewAPIHandler(service *service.XService) *APIHandler {
 // @Success 200 {object} map[string]string "Profile information xScraper.Profile"
 // @Failure 400 {object} map[string]string "Invalid username"
 // @Failure 500 {object} map[string]string "Internal server error"
-// @Router /profile/{username} [get]
+// @Router /api/v1/profile/{username} [get]
 func (h *APIHandler) ProfileHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	username := vars["username"]
@@ -60,7 +60,7 @@ func (h *APIHandler) ProfileHandler(w http.ResponseWriter, r *http.Request) {
 // @Success 200 {array}  []map[string]string "Latest tweets []xScraper.Tweet"
 // @Failure 400 {object} map[string]string "Invalid username"
 // @Failure 500 {object} map[string]string "Internal server error"
-// @Router /tweets/{username} [get]
+// @Router /api/v1/tweets/{username} [get]
 func (h *APIHandler) TweetsHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	username := vars["username"]
