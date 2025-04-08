@@ -29,8 +29,10 @@ func NewAPIHandler(service *service.XService) *APIHandler {
 // @Description Get the profile information of a X user by username
 // @Tags X
 // @Param username path string true "X username"
+// @Param Authorization header string true "Bearer token"
 // @Success 200 {object} map[string]string "Profile information xScraper.Profile"
 // @Failure 400 {object} map[string]string "Invalid username"
+// @Failure 401 {object} map[string]string "Unauthorized"
 // @Failure 500 {object} map[string]string "Internal server error"
 // @Router /api/v1/profile/{username} [get]
 func (h *APIHandler) ProfileHandler(w http.ResponseWriter, r *http.Request) {
@@ -57,8 +59,10 @@ func (h *APIHandler) ProfileHandler(w http.ResponseWriter, r *http.Request) {
 // @Description Get the latest tweets of a X user by username
 // @Tags X
 // @Param username path string true "X username"
+// @Param Authorization header string true "Bearer token"
 // @Success 200 {array}  []map[string]string "Latest tweets []xScraper.Tweet"
 // @Failure 400 {object} map[string]string "Invalid username"
+// @Failure 401 {object} map[string]string "Unauthorized"
 // @Failure 500 {object} map[string]string "Internal server error"
 // @Router /api/v1/tweets/{username} [get]
 func (h *APIHandler) TweetsHandler(w http.ResponseWriter, r *http.Request) {

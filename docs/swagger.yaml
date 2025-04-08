@@ -15,6 +15,11 @@ paths:
         name: username
         required: true
         type: string
+      - description: Bearer token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       responses:
         "200":
           description: Profile information xScraper.Profile
@@ -24,6 +29,12 @@ paths:
             type: object
         "400":
           description: Invalid username
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
           schema:
             additionalProperties:
               type: string
@@ -46,6 +57,11 @@ paths:
         name: username
         required: true
         type: string
+      - description: Bearer token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       responses:
         "200":
           description: Latest tweets []xScraper.Tweet
@@ -59,6 +75,12 @@ paths:
             type: array
         "400":
           description: Invalid username
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
           schema:
             additionalProperties:
               type: string
