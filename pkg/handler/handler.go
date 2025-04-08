@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 
 	"github.com/gorilla/mux"
 	"github.com/kuloud/tweetgo/pkg/api"
@@ -11,17 +12,32 @@ import (
 	"github.com/kuloud/tweetgo/pkg/service"
 	"github.com/rs/cors"
 
+	xScraper "github.com/imperatrona/twitter-scraper"
 	_ "github.com/kuloud/tweetgo/docs" // Import generated docs
 	httpSwagger "github.com/swaggo/http-swagger"
 )
 
 func NewHandler() http.Handler {
-	if os.Getenv("TWITTER_TOKEN") == "" || os.Getenv("TWITTER_CSRF_TOKEN") == "" {
-		log.Fatal("Missing required environment variables")
+	// Define multiple Twitter tokens in the format: TWITTER_TOKENS="token1:csrf1,token2:csrf2"
+	tokensEnv := os.Getenv("TWITTER_TOKENS")
+	if tokensEnv == "" {
+		log.Fatal("Missing required environment variable: TWITTER_TOKENS")
 	}
 
-	twitterService := service.NewTwitterService()
-	apiHandler := api.NewAPIHandler(twitterService)
+	// Parse tokens
+	var tokens []xScraper.AuthToken
+	for _, tokenPair := range strings.Split(tokensEnv, ",") {
+		parts := strings.Split(tokenPair, ":")
+		if len(parts) != 2 {
+			log.Fatal("Invalid token format in TWITTER_TOKENS")
+		}
+		tokens = append(tokens, xScraper.AuthToken{
+			Token:     strings.TrimSpace(parts[0]),
+			CSRFToken: strings.TrimSpace(parts[1]),
+		})
+	}
+	pool := service.NewXServicePool(tokens)
+	apiHandler := api.NewAPIHandler(pool)
 
 	router := mux.NewRouter()
 

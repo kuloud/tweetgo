@@ -17,10 +17,10 @@ import (
 // @description API for scraping X profiles and tweets
 // @BasePath /api/v1
 type APIHandler struct {
-	xService *service.XService
+	xService *service.XServicePool
 }
 
-func NewAPIHandler(service *service.XService) *APIHandler {
+func NewAPIHandler(service *service.XServicePool) *APIHandler {
 	return &APIHandler{xService: service}
 }
 
