@@ -1,4 +1,219 @@
 basePath: /
+definitions:
+  models.GIF:
+    properties:
+      ID:
+        type: string
+      Preview:
+        type: string
+      URL:
+        type: string
+    type: object
+  models.Mention:
+    properties:
+      ID:
+        type: string
+      Name:
+        type: string
+      Username:
+        type: string
+    type: object
+  models.Photo:
+    properties:
+      ID:
+        type: string
+      URL:
+        type: string
+    type: object
+  models.Place:
+    properties:
+      bounding_box:
+        properties:
+          coordinates:
+            items:
+              items:
+                items:
+                  type: number
+                type: array
+              type: array
+            type: array
+          type:
+            type: string
+        type: object
+      country:
+        type: string
+      country_code:
+        type: string
+      full_name:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      place_type:
+        type: string
+    type: object
+  models.Profile:
+    properties:
+      Avatar:
+        type: string
+      Banner:
+        type: string
+      Biography:
+        type: string
+      Birthday:
+        type: string
+      CanHighlightTweets:
+        type: boolean
+      FastFollowersCount:
+        type: integer
+      FollowedBy:
+        type: boolean
+      FollowersCount:
+        type: integer
+      Following:
+        type: boolean
+      FollowingCount:
+        type: integer
+      FriendsCount:
+        type: integer
+      HasGraduatedAccess:
+        type: boolean
+      IsBlueVerified:
+        type: boolean
+      IsPrivate:
+        type: boolean
+      IsVerified:
+        type: boolean
+      Joined:
+        type: string
+      LikesCount:
+        type: integer
+      ListedCount:
+        type: integer
+      Location:
+        type: string
+      MediaCount:
+        type: integer
+      Name:
+        type: string
+      NormalFollowersCount:
+        type: integer
+      PinnedTweetIDs:
+        items:
+          type: string
+        type: array
+      ProfileImageShape:
+        type: string
+      Sensitive:
+        type: boolean
+      TweetsCount:
+        type: integer
+      URL:
+        type: string
+      UserID:
+        type: string
+      Username:
+        type: string
+      Website:
+        type: string
+    type: object
+  models.Tweet:
+    properties:
+      ConversationID:
+        type: string
+      GIFs:
+        items:
+          $ref: '#/definitions/models.GIF'
+        type: array
+      HTML:
+        type: string
+      Hashtags:
+        items:
+          type: string
+        type: array
+      ID:
+        type: string
+      InReplyToStatus:
+        $ref: '#/definitions/models.Tweet'
+      InReplyToStatusID:
+        type: string
+      IsPin:
+        type: boolean
+      IsQuoted:
+        type: boolean
+      IsReply:
+        type: boolean
+      IsRetweet:
+        type: boolean
+      IsSelfThread:
+        type: boolean
+      Likes:
+        type: integer
+      Mentions:
+        items:
+          $ref: '#/definitions/models.Mention'
+        type: array
+      Name:
+        type: string
+      PermanentURL:
+        type: string
+      Photos:
+        items:
+          $ref: '#/definitions/models.Photo'
+        type: array
+      Place:
+        $ref: '#/definitions/models.Place'
+      QuotedStatus:
+        $ref: '#/definitions/models.Tweet'
+      QuotedStatusID:
+        type: string
+      Replies:
+        type: integer
+      RetweetedStatus:
+        $ref: '#/definitions/models.Tweet'
+      RetweetedStatusID:
+        type: string
+      Retweets:
+        type: integer
+      SensitiveContent:
+        type: boolean
+      Text:
+        type: string
+      Thread:
+        items:
+          $ref: '#/definitions/models.Tweet'
+        type: array
+      TimeParsed:
+        type: string
+      Timestamp:
+        type: integer
+      URLs:
+        items:
+          type: string
+        type: array
+      UserID:
+        type: string
+      Username:
+        type: string
+      Videos:
+        items:
+          $ref: '#/definitions/models.Video'
+        type: array
+      Views:
+        type: integer
+    type: object
+  models.Video:
+    properties:
+      HLSURL:
+        type: string
+      ID:
+        type: string
+      Preview:
+        type: string
+      URL:
+        type: string
+    type: object
 host: tweetgo.vercel.app
 info:
   contact: {}
@@ -22,11 +237,9 @@ paths:
         type: string
       responses:
         "200":
-          description: Profile information xScraper.Profile
+          description: Profile information
           schema:
-            additionalProperties:
-              type: string
-            type: object
+            $ref: '#/definitions/models.Profile'
         "400":
           description: Invalid username
           schema:
@@ -64,13 +277,11 @@ paths:
         type: string
       responses:
         "200":
-          description: Latest tweets []xScraper.Tweet
+          description: Latest tweets
           schema:
             items:
               items:
-                additionalProperties:
-                  type: string
-                type: object
+                $ref: '#/definitions/models.Tweet'
               type: array
             type: array
         "400":

@@ -63,8 +63,14 @@ Steps
    vercel
    ```
 1. Set environment variables in the Vercel dashboard:
+
    - `TWITTER_TOKEN`: Your Twitter token
    - `TWITTER_CSRF_TOKEN`: Your Twitter CSRF token
+   - `ADMIN_USERNAME`: Your admin username (local development only)
+   - `ADMIN_PASSWORD`: Your admin password (local development only)
+   - `JWT_SECRET_KEY`: Your JWT secret key
+   - `PORT`: Set to `8080` (local development only)
+
 1. Access the deployed API at the provided Vercel URL.
 
 ### Access Information

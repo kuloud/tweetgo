@@ -30,7 +30,7 @@ func NewAPIHandler(service *service.XService) *APIHandler {
 // @Tags X
 // @Param username path string true "X username"
 // @Param Authorization header string true "Bearer token"
-// @Success 200 {object} map[string]string "Profile information xScraper.Profile"
+// @Success 200 {object} models.Profile "Profile information"
 // @Failure 400 {object} map[string]string "Invalid username"
 // @Failure 401 {object} map[string]string "Unauthorized"
 // @Failure 500 {object} map[string]string "Internal server error"
@@ -60,7 +60,7 @@ func (h *APIHandler) ProfileHandler(w http.ResponseWriter, r *http.Request) {
 // @Tags X
 // @Param username path string true "X username"
 // @Param Authorization header string true "Bearer token"
-// @Success 200 {array}  []map[string]string "Latest tweets []xScraper.Tweet"
+// @Success 200 {array}  []models.Tweet "Latest tweets"
 // @Failure 400 {object} map[string]string "Invalid username"
 // @Failure 401 {object} map[string]string "Unauthorized"
 // @Failure 500 {object} map[string]string "Internal server error"
