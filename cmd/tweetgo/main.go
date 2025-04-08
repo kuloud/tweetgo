@@ -7,9 +7,9 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
-	"github.com/kuloud/tweetgo/internal/api"
-	"github.com/kuloud/tweetgo/internal/middleware"
-	"github.com/kuloud/tweetgo/internal/service"
+	"github.com/kuloud/tweetgo/pkg/api"
+	"github.com/kuloud/tweetgo/pkg/middleware"
+	"github.com/kuloud/tweetgo/pkg/service"
 
 	_ "github.com/kuloud/tweetgo/docs" // Import generated docs
 	httpSwagger "github.com/swaggo/http-swagger"
@@ -22,7 +22,7 @@ func init() {
 	}
 }
 
-func Handler(w http.ResponseWriter, r *http.Request) {
+func Handler_cmd_tweetgo_main_go_cmd_tweetgo_main_go(w http.ResponseWriter, r *http.Request) {
 	if os.Getenv("TWITTER_TOKEN") == "" || os.Getenv("TWITTER_CSRF_TOKEN") == "" {
 		log.Fatal("Missing required environment variables")
 	}

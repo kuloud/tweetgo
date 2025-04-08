@@ -9,7 +9,7 @@ import (
 
 	"github.com/gorilla/mux"
 	xScraper "github.com/imperatrona/twitter-scraper"
-	"github.com/kuloud/tweetgo/internal/service"
+	"github.com/kuloud/tweetgo/pkg/service"
 )
 
 // @title X Scraper API
