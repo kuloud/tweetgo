@@ -37,6 +37,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 	router := mux.NewRouter()
 
+	router.HandleFunc("/", apiHandler.DefaultHandler)
 	router.HandleFunc("/login", apiHandler.LoginHandler).Methods("POST")
 	router.PathPrefix("/swagger/").Handler(httpSwagger.WrapHandler)
 

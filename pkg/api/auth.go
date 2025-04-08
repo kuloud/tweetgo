@@ -7,6 +7,12 @@ import (
 	"github.com/kuloud/tweetgo/pkg/auth"
 )
 
+func (h *APIHandler) DefaultHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/html")
+	w.Write([]byte(`<h1>Welcome to the X Scraper API</h1>
+<p>Visit <a href="/swagger/">Swagger UI</a> to explore the API.</p>`))
+}
+
 // LoginHandler authenticates a user and returns a JWT token.
 // @Summary Login to get a JWT token
 // @Description Authenticate a user and return a JWT token
