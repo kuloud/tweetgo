@@ -50,7 +50,8 @@ func NewHandler() http.Handler {
 
 	// API Routes
 	apiRouter.HandleFunc("/profile/{username}", apiHandler.ProfileHandler).Methods("GET")
-	apiRouter.HandleFunc("/tweets/{username}", apiHandler.TweetsHandler).Methods("GET")
+	apiRouter.HandleFunc("/tweets", apiHandler.TweetsHandler).Methods("GET")
+	apiRouter.HandleFunc("/tweets/{tweetId}", apiHandler.TweetHandler).Methods("GET")
 
 	// Middleware for security and logging
 	router.Use(middleware.LoggingMiddleware)

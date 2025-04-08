@@ -57,17 +57,17 @@ func (h *APIHandler) ProfileHandler(w http.ResponseWriter, r *http.Request) {
 // TweetsHandler returns the latest tweets of a X user.
 // @Summary Get X tweets
 // @Description Get the latest tweets of a X user by username
-// @Tags X
-// @Param username path string true "X username"
+// @Tags X,Tweets
+// @Param username query string true "X username"
 // @Param Authorization header string true "Bearer token"
 // @Success 200 {array}  []models.Tweet "Latest tweets"
 // @Failure 400 {object} map[string]string "Invalid username"
 // @Failure 401 {object} map[string]string "Unauthorized"
 // @Failure 500 {object} map[string]string "Internal server error"
-// @Router /api/v1/tweets/{username} [get]
+// @Router /api/v1/tweets [get]
 func (h *APIHandler) TweetsHandler(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-	username := vars["username"]
+
+	username := r.URL.Query().Get("username")
 
 	if username == "" {
 		http.Error(w, `{"error": "username is required"}`, http.StatusBadRequest)
@@ -90,4 +90,34 @@ func (h *APIHandler) TweetsHandler(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(result)
+}
+
+// TweetHandler returns the information of a specific tweet by its ID.
+// @Summary Get tweet by ID
+// @Description Get the information of a specific tweet by its ID
+// @Tags X, Tweets
+// @Param tweetId path string true "Tweet ID"
+// @Param Authorization header string true "Bearer token"
+// @Success 200 {object} map[string]string "Tweet information xScraper.Tweet"
+// @Failure 400 {object} map[string]string "Invalid tweet ID"
+// @Failure 401 {object} map[string]string "Unauthorized"
+// @Failure 500 {object} map[string]string "Internal server error"
+// @Router /api/v1/tweets/{tweetId} [get]
+func (h *APIHandler) TweetHandler(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	tweetId := vars["tweetId"]
+
+	if tweetId == "" {
+		http.Error(w, `{"error": "tweetId is required"}`, http.StatusBadRequest)
+		return
+	}
+
+	tweet, err := h.xService.GetTweet(tweetId)
+	if err != nil {
+		http.Error(w, fmt.Sprintf(`{"error": "%v"}`, err), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(tweet)
 }

@@ -40,18 +40,14 @@ func (p *XServicePool) getNextService() *XService {
 
 func (p *XServicePool) GetProfile(username string) (xScraper.Profile, error) {
 	service := p.getNextService()
-	return service.getProfile(username)
+	return service.scraper.GetProfile(username)
 }
 
 func (p *XServicePool) GetTweets(ctx context.Context, username string, i int) <-chan *xScraper.TweetResult {
 	service := p.getNextService()
-	return service.getTweets(ctx, username, i)
+	return service.scraper.GetTweets(ctx, username, i)
 }
-
-func (x *XService) getProfile(username string) (xScraper.Profile, error) {
-	return x.scraper.GetProfile(username)
-}
-
-func (x *XService) getTweets(ctx context.Context, username string, i int) <-chan *xScraper.TweetResult {
-	return x.scraper.GetTweets(ctx, username, i)
+func (p *XServicePool) GetTweet(tweetId string) (*xScraper.Tweet, error) {
+	service := p.getNextService()
+	return service.scraper.GetTweet(tweetId)
 }
