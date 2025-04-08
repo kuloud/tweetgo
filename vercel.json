@@ -1,14 +1,14 @@
 {
   "builds": [
     {
-      "src": "cmd/tweetgo/main.go",
+      "src": "cmd/tweetgo/vercel/main.go",
       "use": "@vercel/go"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "cmd/tweetgo/main.go"
+      "dest": "cmd/tweetgo/vercel/main.go"
     }
   ]
 }

@@ -1,4 +1,4 @@
-module handler
+module github.com/kuloud/tweetgo
 
 go 1.24.2
 
@@ -13,21 +13,26 @@ require (
 require (
 	github.com/AlexEidt/Vidio v1.5.1 // indirect
 	github.com/KyleBanks/depth v1.2.1 // indirect
-	github.com/aws/aws-lambda-go v1.47.0 // indirect
 	github.com/go-openapi/jsonpointer v0.21.1 // indirect
 	github.com/go-openapi/jsonreference v0.21.0 // indirect
 	github.com/go-openapi/spec v0.21.0 // indirect
 	github.com/go-openapi/swag v0.23.1 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/mailru/easyjson v0.9.0 // indirect
+	github.com/rs/cors v1.11.1 // indirect
 	github.com/swaggo/files v1.0.1 // indirect
+	github.com/swaggo/files/v2 v2.0.2 // indirect
+	github.com/swaggo/http-swagger/example/go-chi v0.0.0-20240815064334-3a7ae3083475 // indirect
+	github.com/swaggo/http-swagger/example/gorilla v0.0.0-20240815064334-3a7ae3083475 // indirect
+	github.com/swaggo/http-swagger/v2 v2.0.2 // indirect
 	golang.org/x/net v0.39.0 // indirect
 	golang.org/x/tools v0.32.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
-require github.com/kuloud/tweetgo v0.0.0-unpublished
-
 replace github.com/kuloud/tweetgo => ./
 
-require github.com/vercel/go-bridge v0.0.0-20221108222652-296f4c6bdb6d
+require (
+	github.com/go-chi/chi v4.1.2+incompatible
+	github.com/golang-jwt/jwt/v5 v5.2.2
+)

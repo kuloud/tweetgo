@@ -15,7 +15,6 @@ import (
 // @title X Scraper API
 // @version 1.0
 // @description API for scraping X profiles and tweets
-// @host localhost:8080
 // @BasePath /
 type APIHandler struct {
 	xService *service.XService
@@ -30,7 +29,7 @@ func NewAPIHandler(service *service.XService) *APIHandler {
 // @Description Get the profile information of a X user by username
 // @Tags X
 // @Param username path string true "X username"
-// @Success 200 {object} xScraper.Profile
+// @Success 200 {object} map[string]string "Profile information xScraper.Profile"
 // @Failure 400 {object} map[string]string "Invalid username"
 // @Failure 500 {object} map[string]string "Internal server error"
 // @Router /profile/{username} [get]
@@ -58,7 +57,7 @@ func (h *APIHandler) ProfileHandler(w http.ResponseWriter, r *http.Request) {
 // @Description Get the latest tweets of a X user by username
 // @Tags X
 // @Param username path string true "X username"
-// @Success 200 {array} xScraper.TweetResponse
+// @Success 200 {array}  []map[string]string "Latest tweets []xScraper.Tweet"
 // @Failure 400 {object} map[string]string "Invalid username"
 // @Failure 500 {object} map[string]string "Internal server error"
 // @Router /tweets/{username} [get]
