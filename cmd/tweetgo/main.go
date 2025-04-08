@@ -1,4 +1,4 @@
-package main
+package handler
 
 import (
 	"log"
@@ -22,7 +22,7 @@ func init() {
 	}
 }
 
-func handler(w http.ResponseWriter, r *http.Request) {
+func Handler(w http.ResponseWriter, r *http.Request) {
 	if os.Getenv("TWITTER_TOKEN") == "" || os.Getenv("TWITTER_CSRF_TOKEN") == "" {
 		log.Fatal("Missing required environment variables")
 	}
@@ -45,9 +45,4 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	router.PathPrefix("/swagger/").Handler(httpSwagger.WrapHandler)
 
 	router.ServeHTTP(w, r)
-}
-
-func main() {
-	http.HandleFunc("/", handler)
-	http.ListenAndServe(":8080", nil)
 }
