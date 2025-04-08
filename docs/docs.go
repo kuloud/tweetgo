@@ -147,53 +147,6 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/xrating/getXIdByUsername": {
-            "get": {
-                "description": "Get the ID of an X user by username",
-                "tags": [
-                    "XRating"
-                ],
-                "summary": "Get X ID by username",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "X username",
-                        "name": "username",
-                        "in": "query",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Returns the X ID",
-                        "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "string"
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid username",
-                        "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "string"
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal server error",
-                        "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "string"
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/login": {
             "post": {
                 "description": "Authenticate a user and return a JWT token",

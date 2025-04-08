@@ -32,9 +32,6 @@ func NewHandler() http.Handler {
 	apiRouter := router.PathPrefix("/api/v1").Subrouter()
 	apiRouter.Use(middleware.AuthMiddleware)
 
-	xRatingRouter := apiRouter.PathPrefix("/xrating").Subrouter()
-	xRatingRouter.HandleFunc("/getXIdByUsername", apiHandler.GetXIdByUsernameHandler).Methods("GET")
-
 	// API Routes
 	apiRouter.HandleFunc("/profile/{username}", apiHandler.ProfileHandler).Methods("GET")
 	apiRouter.HandleFunc("/tweets/{username", apiHandler.TweetsHandler).Methods("GET")
