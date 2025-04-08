@@ -31,3 +31,13 @@ func (x *XService) GetProfile(username string) (xScraper.Profile, error) {
 func (x *XService) GetTweets(ctx context.Context, username string, i int) <-chan *xScraper.TweetResult {
 	return x.scraper.GetTweets(ctx, username, i)
 }
+
+func (s *XService) GetXIdByUsername(username string) (string, error) {
+	// Implement the logic to get the X ID by username
+	// Example: Use the Twitter scraper library to fetch the ID
+	profile, err := s.scraper.GetProfile(username)
+	if err != nil {
+		return "", err
+	}
+	return profile.UserID, nil
+}

@@ -15,13 +15,40 @@ import (
 // @title X Scraper API
 // @version 1.0
 // @description API for scraping X profiles and tweets
-// @BasePath /
+// @BasePath /api/v1
 type APIHandler struct {
 	xService *service.XService
 }
 
 func NewAPIHandler(service *service.XService) *APIHandler {
 	return &APIHandler{xService: service}
+}
+
+// GetXIdByUsernameHandler returns the ID of an X user by username.
+// @Summary Get X ID by username
+// @Description Get the ID of an X user by username
+// @Tags XRating
+// @Param username query string true "X username"
+// @Success 200 {object} map[string]string "Returns the X ID"
+// @Failure 400 {object} map[string]string "Invalid username"
+// @Failure 500 {object} map[string]string "Internal server error"
+// @Router /api/v1/xrating/getXIdByUsername [get]
+func (h *APIHandler) GetXIdByUsernameHandler(w http.ResponseWriter, r *http.Request) {
+	username := r.URL.Query().Get("username")
+	if username == "" {
+		http.Error(w, `{"error": "username is required"}`, http.StatusBadRequest)
+		return
+	}
+
+	// Call the service to get the X ID
+	id, err := h.xService.GetXIdByUsername(username)
+	if err != nil {
+		http.Error(w, fmt.Sprintf(`{"error": "%v"}`, err), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(map[string]string{"id": id})
 }
 
 // ProfileHandler returns the profile information of a X user.

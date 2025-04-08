@@ -94,6 +94,37 @@ paths:
       summary: Get X tweets
       tags:
       - X
+  /api/v1/xrating/getXIdByUsername:
+    get:
+      description: Get the ID of an X user by username
+      parameters:
+      - description: X username
+        in: query
+        name: username
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Returns the X ID
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Invalid username
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get X ID by username
+      tags:
+      - XRating
   /login:
     post:
       consumes:
