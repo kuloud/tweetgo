@@ -36,8 +36,7 @@ A Go-based API for scraping X (formerly Twitter) profiles and tweets. This proje
 
 1. Set up environment variables: Create a `.env` file in the root directory with the following content:
    ```plainText
-   TWITTER_TOKEN=your_twitter_token
-   TWITTER_CSRF_TOKEN=your_twitter_csrf_token
+   TWITTER_TOKENS="token1:csrf1,token2:csrf2"
    ```
 
 ### API Documentation
@@ -64,8 +63,7 @@ Steps
    ```
 1. Set environment variables in the Vercel dashboard:
 
-   - `TWITTER_TOKEN`: Your Twitter token
-   - `TWITTER_CSRF_TOKEN`: Your Twitter CSRF token
+   - `TWITTER_TOKENS`: Twitter tokens in the format: TWITTER_TOKENS="token1:csrf1,token2:csrf2"
    - `ADMIN_USERNAME`: Your admin username (local development only)
    - `ADMIN_PASSWORD`: Your admin password (local development only)
    - `JWT_SECRET_KEY`: Your JWT secret key
