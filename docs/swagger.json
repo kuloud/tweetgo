@@ -69,11 +69,12 @@
                 }
             }
         },
-        "/api/v1/tweets/{username}": {
+        "/api/v1/tweets": {
             "get": {
                 "description": "Get the latest tweets of a X user by username",
                 "tags": [
-                    "X"
+                    "X",
+                    "Tweets"
                 ],
                 "summary": "Get X tweets",
                 "parameters": [
@@ -81,7 +82,7 @@
                         "type": "string",
                         "description": "X username",
                         "name": "username",
-                        "in": "path",
+                        "in": "query",
                         "required": true
                     },
                     {
@@ -107,6 +108,70 @@
                     },
                     "400": {
                         "description": "Invalid username",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/tweets/{tweetId}": {
+            "get": {
+                "description": "Get the information of a specific tweet by its ID",
+                "tags": [
+                    "X",
+                    "Tweets"
+                ],
+                "summary": "Get tweet by ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Tweet ID",
+                        "name": "tweetId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Bearer token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Tweet information xScraper.Tweet",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid tweet ID",
                         "schema": {
                             "type": "object",
                             "additionalProperties": {

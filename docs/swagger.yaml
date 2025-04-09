@@ -261,12 +261,12 @@ paths:
       summary: Get X profile
       tags:
       - X
-  /api/v1/tweets/{username}:
+  /api/v1/tweets:
     get:
       description: Get the latest tweets of a X user by username
       parameters:
       - description: X username
-        in: path
+        in: query
         name: username
         required: true
         type: string
@@ -305,6 +305,50 @@ paths:
       summary: Get X tweets
       tags:
       - X
+      - Tweets
+  /api/v1/tweets/{tweetId}:
+    get:
+      description: Get the information of a specific tweet by its ID
+      parameters:
+      - description: Tweet ID
+        in: path
+        name: tweetId
+        required: true
+        type: string
+      - description: Bearer token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Tweet information xScraper.Tweet
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Invalid tweet ID
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get tweet by ID
+      tags:
+      - X
+      - Tweets
   /login:
     post:
       consumes:

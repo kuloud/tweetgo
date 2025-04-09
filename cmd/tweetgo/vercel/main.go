@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/joho/godotenv"
+	"github.com/kuloud/tweetgo/pkg/database"
 	"github.com/kuloud/tweetgo/pkg/handler"
 
 	_ "github.com/kuloud/tweetgo/docs" // Import generated docs
@@ -14,6 +15,10 @@ func init() {
 	// Load .env file
 	if err := godotenv.Load(); err != nil {
 		log.Print("No .env file found")
+	}
+
+	if err := database.Init(); err != nil {
+		log.Fatalf("Failed to initialize database: %v", err)
 	}
 }
 
